@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trivia Quiz</title>
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" 
+rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" 
+crossorigin="anonymous">
+<link rel="stylesheet" href="/src/style.css">
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" 
+integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" 
+crossorigin="anonymous" defer></script>
+<script src="/src/index.js" defer></script>
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col opening my-5">
+                <div class="row welcome">
+                    <div class="col welcome-text">
+                        Open Trivia Quiz
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col p-4 instructions">
+                        Choose up to four specific categories or don't choose any for a random mix of all. 
+                    </div>
+                </div>
+                <div class="row category-row">
+                    <div class="col" data-id="9">General Knowledge</div>
+                    <div class="col" data-id="10">Entertainment: Books</div>
+                    <div class="col" data-id="11">Entertainment: Film</div>
+                    <div class="col" data-id="12">Entertainment: Music</div>
+                    <div class="col" data-id="13">Entertainment: Musicals & Theatres</div>
+                    <div class="col" data-id="14">Entertainment: Television</div>
+                </div>
+                <div class="row category-row">
+                    <div class="col" data-id="15">Entertainment: Video Games</div>
+                    <div class="col" data-id="16">Entertainment: Board Games</div>
+                    <div class="col" data-id="17">Science & Nature</div>
+                    <div class="col" data-id="18">Science: Computers</div>
+                    <div class="col" data-id="19">Science: Mathematics</div>
+                    <div class="col" data-id="20">Mythology</div>
+                </div>
+                <div class="row category-row">
+                    <div class="col" data-id="21">Sports</div>
+                    <div class="col" data-id="22">Geography</div>
+                    <div class="col" data-id="23">History</div>
+                    <div class="col" data-id="24">Politics</div>
+                    <div class="col" data-id="25">Art</div>
+                    <div class="col" data-id="26">Celebrities</div>
+                </div>
+                <div class="row category-row">
+                    <div class="col" data-id="27">Animals</div>
+                    <div class="col" data-id="28">Vehicles</div>
+                    <div class="col" data-id="29">Entertainment: Comics</div>
+                    <div class="col" data-id="30">Science: Gadgets</div>
+                    <div class="col" data-id="31">Entertainment: Japanese Anime & Manga</div>
+                    <div class="col" data-id="32">Entertainment: Cartoon & Animations</div>
+                </div>
+                <div class="row justify-content-end">
+                    <button class="btn col col-sm-2 btn-primary btn-lg next m-4">Next!</button>
+                </div>
+                <div class="row">
+                    <div class="col attribution">
+                        <a href="https://opentdb.com">Powered by the Open Trivia Database</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!--<div class="container-lg container-md container-sm container border">
+        <div class="row question-row">
+            <div class="col-12 p-5 col question-col">What year did Super Mario Bros. come out?</div>
+        </div>
+        <div class="row answers">
+            <div class="col correct">1984</div>
+            <div class="col border">1985</div>
+        </div>
+        <div class="row answers">
+            <div class="col border">1986</div>
+            <div class="col incorrect">1987</div>
+        </div>
+        <div class="row justify-content-end">
+            <button class="btn col col-sm-2 btn-primary btn-lg next m-4">Next!</button>
+        </div>
+    </div> -->
+</body>
+</html>
