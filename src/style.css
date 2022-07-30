@@ -32,7 +32,7 @@ body {
     border-radius: 10px;
 }
 
-.category-row>.col {
+.category-row>.col, .difficulty>.col-2, .type>.col-3, .type>.col-2, .answers>.col {
 border: 2px solid white;
 display: flex;
 justify-content: center;
@@ -40,28 +40,12 @@ align-items: center;
 transition: background-color 0.2s ease-out;
 }
 
-.selected {
+.selected, .correct {
     background-color: rgba(64, 173, 64, 0.781);
 }
 
-.question-row {
-    height: 300px;
-}
-
-.correct {
-    background-color: aquamarine;
-    border: 2px darkgreen solid;
-}
-
-.incorrect {
-    background-color: rgb(228, 72, 72);
-    border: 2px darkred solid;
-}
-
-.question-col {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.incorrect{
+    background-color: rgba(192, 38, 38, 0.75);
 }
 
 .next {
@@ -78,4 +62,59 @@ a {
 
 a:visited {
     color: rgb(151, 6, 30);
+}
+
+.underline {
+    border-bottom: 2px solid white;
+    margin-bottom: 2rem;
+}
+
+.difficulty, .type {
+    margin-top: 2rem;
+}
+
+.difficulty>.col-2, .type>.col-3, .type>.col-2 {
+    border-radius: 10px;
+    padding: .3rem;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.question {
+    font-size: 2.4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3rem 0 7rem 0;
+}
+
+.progress {
+    font-size: 1rem;
+    min-height: 2rem;
+    display: flex;
+    justify-content: center;
+    margin-top: .4rem;
+    background-color: inherit;
+}
+
+.result {
+    min-height: 3rem;
+    font-size: 3rem;
+    display: flex;
+    justify-content: center;
+}
+
+.wrong {
+    color: red;
+}
+
+.right {
+    color: rgb(28, 134, 28);
+}
+.submit-row {
+    display: flex;
+    justify-content: center;
 }

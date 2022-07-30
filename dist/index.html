@@ -19,7 +19,8 @@ crossorigin="anonymous" defer></script>
 <body>
 
     <div class="container">
-        <div class="row">
+        <!--Opening page-->
+        <!--<div class="row">
             <div class="col opening my-5">
                 <div class="row welcome">
                     <div class="col welcome-text">
@@ -72,7 +73,89 @@ crossorigin="anonymous" defer></script>
                     </div>
                 </div>
             </div>
+        </div> -->
+        <!--Parameters page-->
+        <!--<div class="row">
+            <div class="col opening my-5">
+                <div class="row welcome">
+                    <div class="col welcome-text">
+                        Open Trivia Quiz
+                    </div>
+                </div>
+                <div class="row underline">
+                    <div class="col p-4 instructions">
+                        Select your quiz settings.
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <label for="question-amount">How many questions? Minimum: 1; Maximum: 50</label>
+                    </div>
+                    <div class="col-2">
+                        <input type="number" name="questionAmount" id="question-amount" min="1" max="50" maxlength="2" oninput="this.value=this.value.slice(0,this.maxLength)">
+                    </div>
+                </div>
+                <div class="row difficulty">
+                    <div class="col-4">Difficulty of questions:</div>
+                    <div class="col-2">Any</div>
+                    <div class="col-2">Easy</div>
+                    <div class="col-2">Medium</div>
+                    <div class="col-2">Hard</div>
+                </div>
+                <div class="row type">
+                    <div class="col-4">Types of questions:</div>
+                    <div class="col-3">Any</div>
+                    <div class="col-3">Multiple Choice</div>
+                    <div class="col-2">True/False</div>
+                </div>
+                <div class="row buttons">
+                    <button class="btn col col-sm-1 btn-primary back m-4">Back!</button>
+                    <button class="btn col col-sm-1 btn-primary next m-4">Next!</button>
+                </div>
+
+                <div class="row">
+                    <div class="col attribution">
+                        <a href="https://opentdb.com">Powered by the Open Trivia Database</a>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <!--Multiple choice question example-->
+        <div class="row justify-content-end">
+            <div class="col-2 progress">
+                Question 14/30 
+            </div>
         </div>
+        <div class="row">
+            <div class="col opening my-5">
+                <div class="row">
+                    <div class="col result">
+                        
+                    </div>
+                </div>
+                <div class="question">
+                    What year did Super Mario Bros. come out?
+                </div>
+                <div class="row answers">
+                    <div class="col">1983</div>
+                    <div class="col">1984</div>
+                </div>
+                <div class="row answers">
+                    <div class="col">1985</div>
+                    <div class="col">1986</div>
+                </div>
+                <!--<div class="row submit-row">
+                    <button class="btn col col-sm-1 btn-primary back m-4 submit">Submit!</button>
+                </div>-->
+                <div class="row buttons">
+                    <button class="btn col col-sm-1 btn-primary back m-4">Back!</button>
+                    <button class="btn col col-sm-1 btn-primary next m-4">Next!</button>
+                </div>
+
+            </div>
+        </div>
+        
+        
     </div>
     
     <!--<div class="container-lg container-md container-sm container border">
