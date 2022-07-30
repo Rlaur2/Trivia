@@ -27,17 +27,22 @@ body {
     font-size: 1.4rem;
 }
 
-.col {
+.col, .col-6, .col-2 {
     padding: 1rem;
     border-radius: 10px;
 }
 
-.category-row>.col, .difficulty>.col-2, .type>.col-3, .type>.col-2, .answers>.col {
-border: 2px solid white;
-display: flex;
-justify-content: center;
-align-items: center;
-transition: background-color 0.2s ease-out;
+.col-2 {
+    padding: .6rem;
+}
+
+.category-row>.col-2, .difficulty>.col-2, .type>.col-3, .type>.col-2, .answers>.col {
+    border: 2px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s ease-out;
+    font-size: 1.8rem;
 }
 
 .selected, .correct {
@@ -117,4 +122,34 @@ a:visited {
 .submit-row {
     display: flex;
     justify-content: center;
+}
+
+.adulation {
+    font-size: 3.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+.evaluation {
+    display: flex;
+    justify-content: center;
+    font-size: 2.5rem;
+}
+
+.excellent {
+    background-color: green;
+    color: white;
+}
+
+.good {
+    background-color: yellowgreen;
+}
+
+.mediocre {
+    background-color: rgba(190, 140, 46, 0.877);
+}
+
+.awful {
+    background-color: red;
+    color: white;
 }
