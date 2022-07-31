@@ -1,16 +1,27 @@
 import { settingsPage } from "./settings";
 
+let categorySelectionCheck = 0;
+let lastCategorySelected = '';
+const mainPage = (number, categorySelected) => {
 const categories = document.querySelectorAll('.category');
 //this variable is to keep a count of how many categories were selected, we want a max of 4
-let categorySelectionCheck = 0;
+if (number) {
+   categorySelectionCheck = number;
+};
 //variable used to "undo" and unselect the last category chosen when 4 have already been chosen
-let lastCategorySelected = '';
+if (categorySelected) {
+    for (let category of categories) {
+        if (category.dataset.id === categorySelected.dataset.id) {
+            lastCategorySelected = category;
+        };
+    };
+};
 //array that will contain the dataset.id of the chosen categories. The id is needed for the API call
-const categoriesChosen = [];
+let categoriesChosen = [];
 for (let category of categories) {
     category.addEventListener('mousedown', e => {
         if (categorySelectionCheck === 4 && !e.target.classList.contains('selected')) {
-            lastCategorySelected.classList.toggle('selected');
+            lastCategorySelected.classList.remove('selected');
             e.target.classList.toggle('selected');
             lastCategorySelected = e.target;
         } else if (!e.target.classList.contains('selected')) {
@@ -50,21 +61,21 @@ categoryNextButton.addEventListener('mousedown', e => {
                <label for="question-amount">How many questions? Minimum: 1; Maximum: 50</label>
            </div>
            <div class="col-2">
-               <input type="number" name="questionAmount" id="question-amount" min="1" max="50" maxlength="2" oninput="this.value=this.value.slice(0,this.maxLength)">
+               <input type="number" name="questionAmount" id="question-amount" min="1" max="50" value="10" maxlength="2" oninput="this.value=this.value.slice(0,this.maxLength)">
            </div>
        </div>
        <div class="row difficulty">
            <div class="col-4">Difficulty of questions:</div>
-           <div class="col-2">Any</div>
-           <div class="col-2">Easy</div>
-           <div class="col-2">Medium</div>
-           <div class="col-2">Hard</div>
+           <div class="col-2 selected" data-difficulty="any">Any</div>
+           <div class="col-2" data-difficulty="easy">Easy</div>
+           <div class="col-2" data-difficulty="medium">Medium</div>
+           <div class="col-2" data-difficulty="hard">Hard</div>
        </div>
        <div class="row type">
            <div class="col-4">Types of questions:</div>
-           <div class="col-3">Any</div>
-           <div class="col-3">Multiple Choice</div>
-           <div class="col-2">True/False</div>
+           <div class="col-3 question-type selected" data-type="any">Any</div>
+           <div class="col-3 question-type" data-type="multiple">Multiple Choice</div>
+           <div class="col-2 question-type" data-type="boolean">True/False</div>
        </div>
        <div class="row buttons">
            <button class="btn col col-sm-1 btn-primary settings-back m-4">Back!</button>
@@ -77,7 +88,11 @@ categoryNextButton.addEventListener('mousedown', e => {
        </div>
    </div>
 </div> `;
-settingsPage();
+settingsPage(categoriesChosen, lastCategorySelected);
 });
+};
+mainPage();
+
+export {mainPage};
 
 

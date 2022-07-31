@@ -36,6 +36,10 @@ body {
     padding: .6rem;
 }
 
+.col-4 {
+    font-size: 1.3rem;
+}
+
 .category-row>.col-2, .difficulty>.col-2, .type>.col-3, .type>.col-2, .answers>.col {
     border: 2px solid white;
     display: flex;
