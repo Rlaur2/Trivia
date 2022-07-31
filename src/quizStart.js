@@ -2,7 +2,7 @@ import { quizDisplay } from "./quizDisplay";
 
 const quizStart = (categoriesChosen, questionAmount, difficultySelected, typeSelected) => {
     const questionPerCategory = Math.floor(questionAmount / categoriesChosen.length);
-    const extraQuestions = questionAmount % questionPerCategory;
+    const extraQuestions = questionAmount - questionPerCategory * categoriesChosen.length;
     let difficulty = '';
     let type = '';
     if (difficultySelected === 'easy') {
@@ -40,7 +40,6 @@ const quizStart = (categoriesChosen, questionAmount, difficultySelected, typeSel
                     alert(`The category ${currentCategory} does not have enough of the specified questions for this query.`);
                 };
                 getCategoryIDs();
-                return;
             };
             return output;
         });
