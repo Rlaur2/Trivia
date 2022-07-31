@@ -1,4 +1,5 @@
 import { settingsBack } from "./settingsBack";
+import { quizStart } from "./quizStart";
 
 const settingsPage = (categoriesChosen, lastCategorySelected) => {
     const questionAmount = document.querySelector('#question-amount');
@@ -43,7 +44,7 @@ const settingsPage = (categoriesChosen, lastCategorySelected) => {
             alert('The quiz cannot be 0 or less than 0!');
             return;
         }
-        
+        quizStart(categoriesChosen, questionAmount.value, difficultySelected, typeSelected);
     });
 };
 
