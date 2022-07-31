@@ -1,4 +1,4 @@
-import { quizDisplay } from "./quizDisplay";
+import { quizConstruction } from "./quizConstruction";
 
 const quizStart = (categoriesChosen, questionAmount, difficultySelected, typeSelected) => {
     const questionPerCategory = Math.floor(questionAmount / categoriesChosen.length);
@@ -43,12 +43,12 @@ const quizStart = (categoriesChosen, questionAmount, difficultySelected, typeSel
             };
             return output;
         });
-        Promise.all(quizQuestions).then(output => quizDisplay(output));
+        Promise.all(quizQuestions).then(output => quizConstruction(output));
      } else {
         const noCategoryQuiz = async () => {
             const response = await fetch(`https://opentdb.com/api.php?amount=${questionAmount}${difficulty}${type}`);
             const output = await response.json();
-            quizDisplay(output);
+            quizConstruction(output);
         }
         noCategoryQuiz();
      };

@@ -10,3 +10,8 @@ Ideas to implement
 -Use the token generator to ensure unique sessions and
 reset token when 'Code 4: Token Empty' is returned
 -Display a results screen at the end with percentage of correct answers
+
+Things to polish
+- Make sure every button has pointer:cursor
+- Add token to API call so no repeats, then make sure you deal with the errors
+- Add a "loading" screen if possible during longer API calls
