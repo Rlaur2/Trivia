@@ -67,7 +67,11 @@ for (let category of categories) {
         }
     });
 };
-mainPage(categorySelectionCheck, lastCategorySelected);
+if (categoriesChosen && lastCategorySelected) {
+    mainPage(categorySelectionCheck, lastCategorySelected);
+} else {
+    mainPage(0,'');
+}
 };
 
 export {settingsBack};

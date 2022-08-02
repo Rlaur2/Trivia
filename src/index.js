@@ -5,7 +5,7 @@ let lastCategorySelected = '';
 const mainPage = (number, categorySelected) => {
 const categories = document.querySelectorAll('.category');
 //this variable is to keep a count of how many categories were selected, we want a max of 4
-if (number) {
+if (number != undefined) {
    categorySelectionCheck = number;
 };
 //variable used to "undo" and unselect the last category chosen when 4 have already been chosen

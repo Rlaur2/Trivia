@@ -17,19 +17,20 @@ const nextQuestion = (questions, currentQuestion, correctAnswers) => {
     const bottomRow = document.querySelector('.bottom');
     bottomRow.replaceChildren();
     if (questions[currentQuestion - 1].type === 'multiple') {
+        questions[currentQuestion - 1].incorrect_answers = questions[currentQuestion - 1].incorrect_answers.map(item => {
+            return {name: item};
+        });
         const allAnswers = questions[currentQuestion - 1].incorrect_answers;
-        allAnswers.push(questions[currentQuestion - 1].correct_answer);
+        allAnswers.push({name:questions[currentQuestion - 1].correct_answer, correct: true});
         shuffleArray(allAnswers);
         allAnswers.forEach((item, index) => {
+            const answer = document.createElement('div');
+            answer.classList.toggle('col');
+            answer.innerHTML = item.name;
+            answer.dataset.index = index;
             if (index < 2) {
-                const answer = document.createElement('div');
-                answer.classList.toggle('col');
-                answer.innerHTML = item;
                 topRow.appendChild(answer);
             } else {
-                const answer = document.createElement('div');
-                answer.classList.toggle('col');
-                answer.innerHTML = item;
                 bottomRow.appendChild(answer);
             }
         });
@@ -54,33 +55,50 @@ const selectAnswer = (e) => {
 };
 topRow.addEventListener('mousedown', selectAnswer);
 bottomRow.addEventListener('mousedown', selectAnswer);
-const buttonsRow = document.querySelector('.buttons');
-const oldNext = document.querySelector('.next');
-buttonsRow.removeChild(oldNext);
 const submitButton = document.querySelector('.submit');
 const submitAction = () => {
     if (!answerChosen) {
         alert('Please choose an answer.');
         return;
-    } else if (answerChosen.innerHTML === questions[currentQuestion - 1].correct_answer) {
-        result.classList.add('right');
-        result.textContent = 'Correct!';
-        correctAnswers++;
-    } else {
-        result.classList.add('wrong');
-        result.textContent = 'Incorrect!';
-        answerChosen.classList.remove('selected');
-        answerChosen.classList.add('incorrect');
-        for (let answerSelection of answerSelections) {
-            if (answerSelection.innerHTML === questions[currentQuestion - 1].correct_answer) {
-                answerSelection.classList.add('selected');
-            }
+    } 
+    if (questions[currentQuestion - 1].type === 'multiple') {
+        if (questions[currentQuestion - 1].incorrect_answers[answerChosen.dataset.index].correct) {
+            result.classList.add('right');
+            result.textContent = 'Correct!';
+            correctAnswers++;
+        } else {
+            result.classList.add('wrong');
+            result.textContent = 'Incorrect!';
+            answerChosen.classList.remove('selected');
+            answerChosen.classList.add('incorrect');
+            for (let answerSelection of answerSelections) {
+                if (questions[currentQuestion - 1].incorrect_answers[answerSelection.dataset.index].correct) {
+                    answerSelection.classList.add('selected');
+                }
+            };
         };
+        questions[currentQuestion - 1].incorrect_answers[answerChosen.dataset.index].selected = true;
+    } else {
+        if (answerChosen.textContent = questions[currentQuestion - 1].correct_answer) {
+            result.classList.add('right');
+            result.textContent = 'Correct!';
+            correctAnswers++;
+        } else {
+            result.classList.add('wrong');
+            result.textContent = 'Incorrect!';
+            answerChosen.classList.remove('selected');
+            answerChosen.classList.add('incorrect');
+            for (let answerSelection of answerSelections) {
+                if (answerSelection.textContent = questions[currentQuestion - 1].correct_answer) {
+                    answerSelection.classList.add('selected');
+                }
+            };
+        }
+        questions[currentQuestion - 1].booleanChosen = answerChosen.textContent;
     };
     submitButton.removeEventListener('mousedown', submitAction);
     topRow.removeEventListener('mousedown', selectAnswer);
     bottomRow.removeEventListener('mousedown', selectAnswer);
-    
     if (currentQuestion === questions.length) {
         const finishButton = document.createElement('button');
         finishButton.classList.toggle('btn');
@@ -110,6 +128,20 @@ const submitAction = () => {
     };
 }; 
 submitButton.addEventListener('mousedown', submitAction);
+const buttonsRow = document.querySelector('.buttons');
+buttonsRow.replaceChildren();
+const backButton = document.createElement('button');
+backButton.classList.toggle('btn');
+backButton.classList.toggle('col');
+backButton.classList.toggle('col-sm-1');
+backButton.classList.toggle('btn-primary');
+backButton.classList.toggle('back');
+backButton.classList.toggle('m-4');
+backButton.textContent = 'Back!';
+buttonsRow.appendChild(backButton);
+backButton.addEventListener('mousedown', () => {
+    review();
+})
 }
 
 export {nextQuestion};

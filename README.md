@@ -15,8 +15,8 @@ Things to polish
 - Make sure every button has pointer:cursor
 - Add token to API call so no repeats, then make sure you deal with the errors
 - Add a "loading" screen if possible during longer API calls
-- Refactor code to not use a loop to find correct answer
 
 Things to fix
 -If response code 1 happens the quiz still displays
+- Refactor code to find correct answer using a key:value pair instead of comparing text
 -fix font sizing with min/max or clamp

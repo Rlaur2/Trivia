@@ -1,5 +1,7 @@
 import { shuffleArray } from "./quizConstruction";
 import { nextQuestion } from "./nextQuestion";
+import { settingsBack } from "./settingsBack";
+import { endOfQuiz } from "./results";
 
 const quizDisplay = (questions) => {
 let currentQuestion = 1;
@@ -31,7 +33,7 @@ container.innerHTML =
         <button class="btn col col-sm-1 btn-primary m-4 submit">Submit!</button>
     </div>
     <div class="row buttons">
-        <button class="btn col col-sm-1 btn-primary start-over m-4">Start Over!</button>
+        <button class="btn col col-sm-1 btn-primary start-over back m-4">Start Over!</button>
     </div>
 </div>
 </div>`
@@ -42,21 +44,21 @@ const question = document.querySelector('.question');
 question.innerHTML = questions[currentQuestion - 1].question;
 const topRow = document.querySelector('.top');
 const bottomRow = document.querySelector('.bottom');
-
 if (questions[currentQuestion - 1].type === 'multiple') {
+    questions[currentQuestion - 1].incorrect_answers = questions[currentQuestion - 1].incorrect_answers.map(item => {
+        return {name: item};
+    });
     const allAnswers = questions[currentQuestion - 1].incorrect_answers;
-    allAnswers.push(questions[currentQuestion - 1].correct_answer);
+    allAnswers.push({name:questions[currentQuestion - 1].correct_answer, correct: true});
     shuffleArray(allAnswers);
     allAnswers.forEach((item, index) => {
+        const answer = document.createElement('div');
+        answer.classList.toggle('col');
+        answer.innerHTML = item.name;
+        answer.dataset.index = index;
         if (index < 2) {
-            const answer = document.createElement('div');
-            answer.classList.toggle('col');
-            answer.innerHTML = item;
             topRow.appendChild(answer);
         } else {
-            const answer = document.createElement('div');
-            answer.classList.toggle('col');
-            answer.innerHTML = item;
             bottomRow.appendChild(answer);
         }
     });
@@ -88,20 +90,41 @@ const submitAction = () => {
     if (!answerChosen) {
         alert('Please choose an answer.');
         return;
-    } else if (answerChosen.innerHTML === questions[currentQuestion - 1].correct_answer) {
-        result.classList.add('right');
-        result.textContent = 'Correct!';
-        correctAnswers++;
-    } else {
-        result.classList.add('wrong');
-        result.textContent = 'Incorrect!';
-        answerChosen.classList.remove('selected');
-        answerChosen.classList.add('incorrect');
-        for (let answerSelection of answerSelections) {
-            if (answerSelection.innerHTML === questions[currentQuestion - 1].correct_answer) {
-                answerSelection.classList.add('selected');
-            }
+    } 
+    if (questions[currentQuestion - 1].type === 'multiple') {
+        if (questions[currentQuestion - 1].incorrect_answers[answerChosen.dataset.index].correct) {
+            result.classList.add('right');
+            result.textContent = 'Correct!';
+            correctAnswers++;
+        } else {
+            result.classList.add('wrong');
+            result.textContent = 'Incorrect!';
+            answerChosen.classList.remove('selected');
+            answerChosen.classList.add('incorrect');
+            for (let answerSelection of answerSelections) {
+                if (questions[currentQuestion - 1].incorrect_answers[answerSelection.dataset.index].correct) {
+                    answerSelection.classList.add('selected');
+                }
+            };
         };
+        questions[currentQuestion - 1].incorrect_answers[answerChosen.dataset.index].selected = true;
+    } else {
+        if (answerChosen.textContent = questions[currentQuestion - 1].correct_answer) {
+            result.classList.add('right');
+            result.textContent = 'Correct!';
+            correctAnswers++;
+        } else {
+            result.classList.add('wrong');
+            result.textContent = 'Incorrect!';
+            answerChosen.classList.remove('selected');
+            answerChosen.classList.add('incorrect');
+            for (let answerSelection of answerSelections) {
+                if (answerSelection.textContent = questions[currentQuestion - 1].correct_answer) {
+                    answerSelection.classList.add('selected');
+                }
+            };
+        }
+        questions[currentQuestion - 1].booleanChosen = answerChosen.textContent;
     };
     submitButton.removeEventListener('mousedown', submitAction);
     topRow.removeEventListener('mousedown', selectAnswer);
@@ -136,6 +159,10 @@ const submitAction = () => {
     };
 }; 
 submitButton.addEventListener('mousedown', submitAction);
+const startOverButton = document.querySelector('.start-over');
+startOverButton.addEventListener('mousedown', () => {
+    settingsBack([],'');
+}); 
 };
 
 export {quizDisplay};

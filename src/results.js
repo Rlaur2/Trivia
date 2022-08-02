@@ -1,3 +1,5 @@
+import { settingsBack } from "./settingsBack";
+
 const endOfQuiz = (questions, correctAnswers) => {
     const container = document.querySelector('.container');
     container.replaceChildren();
@@ -25,8 +27,8 @@ const endOfQuiz = (questions, correctAnswers) => {
             </div>
         </div>
         <div class="row buttons">
-            <button class="btn col col-sm-1 btn-primary back m-4">Review!</button>
-            <button class="btn col col-sm-1 btn-primary next m-4">New Quiz!</button>
+            <button class="btn col col-sm-1 btn-primary review m-4">Review!</button>
+            <button class="btn col col-sm-1 btn-primary new m-4">New Quiz!</button>
         </div>
         <div class="row">
             <div class="col attribution">
@@ -110,7 +112,10 @@ const displayGif = async () => {
     }
 };
 displayGif();
-
+const newQuiz = document.querySelector('.new');
+newQuiz.addEventListener('mousedown', () => {
+    settingsBack([],'');
+});
 
 }
 export {endOfQuiz};
