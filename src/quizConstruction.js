@@ -1,27 +1,31 @@
 import { quizDisplay } from "./quizDisplay";
 
 const quizConstruction = (output) => {
-    let alreadyRandomized = false;    
-    if (output.length < 1) {
+    if (output[0].response_code === 1) {
         return;
-    };
-    let allQuestions = [];
-    if (Array.isArray(output)) {
-        output.forEach(item => {
-            item.results.forEach(question => {
+    } else {
+        let alreadyRandomized = false;    
+        if (output.length < 1) {
+            return;
+        };
+        let allQuestions = [];
+        if (Array.isArray(output)) {
+            output.forEach(item => {
+                item.results.forEach(question => {
+                    allQuestions.push(question);
+                });
+            });
+        } else {
+            output.results.forEach(question => {
                 allQuestions.push(question);
             });
-        });
-    } else {
-        output.results.forEach(question => {
-            allQuestions.push(question);
-        });
-        alreadyRandomized = true;
-    };
-    if (!alreadyRandomized) {
-        shuffleArray(allQuestions);
+            alreadyRandomized = true;
+        };
+        if (!alreadyRandomized) {
+            shuffleArray(allQuestions);
+        }
+        quizDisplay(allQuestions)
     }
-    quizDisplay(allQuestions)
 }
 
  //code found on stack overflow to sort an array(in-place) randomly
