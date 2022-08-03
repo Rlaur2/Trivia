@@ -1,5 +1,6 @@
 import { shuffleArray } from "./quizConstruction";
 import { endOfQuiz } from "./results";
+import { reviewQuestion } from "./review";
 
 const nextQuestion = (questions, currentQuestion, correctAnswers) => {
     currentQuestion++;
@@ -16,13 +17,26 @@ const nextQuestion = (questions, currentQuestion, correctAnswers) => {
     topRow.replaceChildren();
     const bottomRow = document.querySelector('.bottom');
     bottomRow.replaceChildren();
-    if (questions[currentQuestion - 1].type === 'multiple') {
+    if (questions[currentQuestion - 1].type === 'multiple' && questions[currentQuestion - 1].incorrect_answers.length === 3) {
         questions[currentQuestion - 1].incorrect_answers = questions[currentQuestion - 1].incorrect_answers.map(item => {
             return {name: item};
         });
         const allAnswers = questions[currentQuestion - 1].incorrect_answers;
         allAnswers.push({name:questions[currentQuestion - 1].correct_answer, correct: true});
         shuffleArray(allAnswers);
+        allAnswers.forEach((item, index) => {
+            const answer = document.createElement('div');
+            answer.classList.toggle('col');
+            answer.innerHTML = item.name;
+            answer.dataset.index = index;
+            if (index < 2) {
+                topRow.appendChild(answer);
+            } else {
+                bottomRow.appendChild(answer);
+            }
+        });
+    } else if (questions[currentQuestion - 1].type === 'multiple' && questions[currentQuestion - 1].incorrect_answers.length === 4) {
+        const allAnswers = questions[currentQuestion - 1].incorrect_answers;
         allAnswers.forEach((item, index) => {
             const answer = document.createElement('div');
             answer.classList.toggle('col');
@@ -55,7 +69,16 @@ const selectAnswer = (e) => {
 };
 topRow.addEventListener('mousedown', selectAnswer);
 bottomRow.addEventListener('mousedown', selectAnswer);
-const submitButton = document.querySelector('.submit');
+const submitRow = document.querySelector('.submit-row');
+const submitButton = document.createElement('button');
+submitButton.classList.toggle('btn');
+submitButton.classList.toggle('col');
+submitButton.classList.toggle('col-sm-1');
+submitButton.classList.toggle('btn-primary');
+submitButton.classList.toggle('submit');
+submitButton.classList.toggle('m-4');
+submitButton.textContent = 'Submit!';
+submitRow.appendChild(submitButton);
 const submitAction = () => {
     if (!answerChosen) {
         alert('Please choose an answer.');
@@ -79,7 +102,7 @@ const submitAction = () => {
         };
         questions[currentQuestion - 1].incorrect_answers[answerChosen.dataset.index].selected = true;
     } else {
-        if (answerChosen.textContent = questions[currentQuestion - 1].correct_answer) {
+        if (answerChosen.textContent === questions[currentQuestion - 1].correct_answer) {
             result.classList.add('right');
             result.textContent = 'Correct!';
             correctAnswers++;
@@ -89,14 +112,14 @@ const submitAction = () => {
             answerChosen.classList.remove('selected');
             answerChosen.classList.add('incorrect');
             for (let answerSelection of answerSelections) {
-                if (answerSelection.textContent = questions[currentQuestion - 1].correct_answer) {
+                if (answerSelection.textContent === questions[currentQuestion - 1].correct_answer) {
                     answerSelection.classList.add('selected');
                 }
             };
         }
         questions[currentQuestion - 1].booleanChosen = answerChosen.textContent;
     };
-    submitButton.removeEventListener('mousedown', submitAction);
+    submitRow.replaceChildren();
     topRow.removeEventListener('mousedown', selectAnswer);
     bottomRow.removeEventListener('mousedown', selectAnswer);
     if (currentQuestion === questions.length) {
@@ -110,7 +133,7 @@ const submitAction = () => {
         finishButton.textContent = 'Finish!';
         buttonsRow.appendChild(finishButton);
         finishButton.addEventListener('mousedown', () => {
-            endOfQuiz(questions, correctAnswers);
+            endOfQuiz(questions, correctAnswers, currentQuestion);
         });
     } else {
         const nextButton = document.createElement('button');
@@ -140,8 +163,10 @@ backButton.classList.toggle('m-4');
 backButton.textContent = 'Back!';
 buttonsRow.appendChild(backButton);
 backButton.addEventListener('mousedown', () => {
-    review();
-})
-}
+    topRow.removeEventListener('mousedown', selectAnswer);
+    bottomRow.removeEventListener('mousedown', selectAnswer);
+    reviewQuestion(questions, currentQuestion, correctAnswers);
+});
+};
 
 export {nextQuestion};

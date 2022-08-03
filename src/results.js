@@ -1,6 +1,7 @@
+import { reviewQuestion } from "./review";
 import { settingsBack } from "./settingsBack";
 
-const endOfQuiz = (questions, correctAnswers) => {
+const endOfQuiz = (questions, correctAnswers, currentQuestion) => {
     const container = document.querySelector('.container');
     container.replaceChildren();
     container.innerHTML = 
@@ -115,6 +116,42 @@ displayGif();
 const newQuiz = document.querySelector('.new');
 newQuiz.addEventListener('mousedown', () => {
     settingsBack([],'');
+});
+const review = document.querySelector('.review');
+review.addEventListener('mousedown', () => {
+    container.replaceChildren();
+    container.innerHTML = 
+    `<div class="row justify-content-end">
+    <div class="col-2 progress">
+
+    </div>
+    </div>
+    <div class="row">
+    <div class="col opening my-5">
+        <div class="row">
+            <div class="col result">
+                
+            </div>
+        </div>
+        <div class="question">
+            
+        </div>
+        <div class="row top answers">
+    
+        </div>
+        <div class="row bottom answers">
+        
+        </div>
+        <div class="row submit-row">
+            <button class="btn col col-sm-1 btn-primary m-4 submit">Submit!</button>
+        </div>
+        <div class="row buttons">
+            <button class="btn col col-sm-1 btn-primary start-over back m-4">Start Over!</button>
+        </div>
+    </div>
+    </div>`;
+    currentQuestion++;
+    reviewQuestion(questions, currentQuestion, correctAnswers);
 });
 
 }

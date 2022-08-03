@@ -109,7 +109,7 @@ const submitAction = () => {
         };
         questions[currentQuestion - 1].incorrect_answers[answerChosen.dataset.index].selected = true;
     } else {
-        if (answerChosen.textContent = questions[currentQuestion - 1].correct_answer) {
+        if (answerChosen.textContent === questions[currentQuestion - 1].correct_answer) {
             result.classList.add('right');
             result.textContent = 'Correct!';
             correctAnswers++;
@@ -119,7 +119,7 @@ const submitAction = () => {
             answerChosen.classList.remove('selected');
             answerChosen.classList.add('incorrect');
             for (let answerSelection of answerSelections) {
-                if (answerSelection.textContent = questions[currentQuestion - 1].correct_answer) {
+                if (answerSelection.textContent === questions[currentQuestion - 1].correct_answer) {
                     answerSelection.classList.add('selected');
                 }
             };
@@ -127,6 +127,8 @@ const submitAction = () => {
         questions[currentQuestion - 1].booleanChosen = answerChosen.textContent;
     };
     submitButton.removeEventListener('mousedown', submitAction);
+    const submitRow = document.querySelector('.submit-row');
+    submitRow.replaceChildren();
     topRow.removeEventListener('mousedown', selectAnswer);
     bottomRow.removeEventListener('mousedown', selectAnswer);
     const buttonsRow = document.querySelector('.buttons');
