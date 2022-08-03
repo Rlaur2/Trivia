@@ -34,9 +34,13 @@ const endOfQuiz = (questions, correctAnswers, currentQuestion) => {
         <div class="row">
             <div class="col attribution">
                 <a href="https://opentdb.com">Powered by the Open Trivia Database</a>
-                <a href="https://giphy.com">Powered by GIPHY</a>
             </div>
         </div>
+        <div class="row">
+            <div class="col attribution">
+                <a href="https://giphy.com">Powered by GIPHY</a>
+            </div>
+        </div>        
     </div>
 </div>`
 
