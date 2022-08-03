@@ -46,7 +46,7 @@ body {
     justify-content: center;
     align-items: center;
     transition: background-color 0.2s ease-out;
-    font-size: 1.8rem;
+    font-size: clamp(.5rem, 2vw, 2rem);
 }
 
 .selected, .correct {

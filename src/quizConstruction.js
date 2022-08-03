@@ -1,8 +1,11 @@
 import { quizDisplay } from "./quizDisplay";
 
 const quizConstruction = (output) => {
-    if (output[0].response_code === 1) {
-        return;
+    console.log(output);
+    if (Array.isArray(output)) {
+        if (output[0].response_code === 1) {
+            return;
+        };
     } else {
         let alreadyRandomized = false;    
         if (output.length < 1) {

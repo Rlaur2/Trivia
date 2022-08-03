@@ -18,6 +18,5 @@ Things to polish
 
 
 Things to fix
--If response code 1 happens the quiz still displays
 -fix font sizing with min/max or clamp
 -Add giphy attribution
