@@ -1,13 +1,13 @@
 import { quizDisplay } from "./quizDisplay";
 
 const quizConstruction = (output) => {
-    console.log(output);
+    //the only output that meets this condition is when response code 1 is received 
     if (Array.isArray(output) && output[0].response_code) {
-            console.log('response code 1 is the reason');
             return;
     } else {
         let alreadyRandomized = false;    
         let allQuestions = [];
+        //puts all the questions into a single array. Not needed since it was already in an array but it makes it easier to work with
         if (Array.isArray(output)) {
             output.forEach(item => {
                 item.results.forEach(question => {
@@ -18,6 +18,7 @@ const quizConstruction = (output) => {
             output.results.forEach(question => {
                 allQuestions.push(question);
             });
+            //when no category is chosen the questions are already randomized and don't need to be randomized again
             alreadyRandomized = true;
         };
         if (!alreadyRandomized) {

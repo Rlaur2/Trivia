@@ -3,6 +3,7 @@ import { mainPage } from ".";
 const settingsBack = (categoriesChosen, lastCategorySelected) => {
     const container = document.querySelector('.container');
     container.replaceChildren();
+    //setting up DOM as it was during mainPage()
     container.innerHTML = `<div class="row">
     <div class="col opening my-5">
         <div class="row welcome">
@@ -59,6 +60,7 @@ const settingsBack = (categoriesChosen, lastCategorySelected) => {
 </div>`;
 const categories = document.querySelectorAll('.category');
 let categorySelectionCheck = 0;
+//the applies the selected class to the categories that already had it
 for (let category of categories) {
     categoriesChosen.forEach(element => {
         if (element === category.dataset.id) {
@@ -67,9 +69,12 @@ for (let category of categories) {
         }
     });
 };
+//if parameters were passed(pretty much only if going back from the settings page) 
+//it passes the correct info and the previous categories are given the selected class
 if (categoriesChosen && lastCategorySelected) {
     mainPage(categorySelectionCheck, lastCategorySelected);
 } else {
+    //if running this function from somewhere other than the settings page, the categories get reset essentially
     mainPage(0,'');
 }
 };

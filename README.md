@@ -19,4 +19,3 @@ Things to polish
 
 Things to fix
 -fix font sizing with min/max or clamp
--Add giphy attribution

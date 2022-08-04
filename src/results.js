@@ -44,6 +44,7 @@ const endOfQuiz = (questions, correctAnswers, currentQuestion) => {
     </div>
 </div>`
 
+//this code determines your score in percentage, it slices out the first digit and the decimal unless the score is 100 or 0
 let resultsString = (correctAnswers / questions.length).toFixed(2);
 let resultsStraight = '';
 if (resultsString === '1.00') {
@@ -52,12 +53,14 @@ if (resultsString === '1.00') {
     resultsStraight = '0';
 } else {
     resultsString = resultsString.slice(2,4);
+    //this will slice off a leading zero from a score between 1 and 9, so 5% instead of 05%
     if (resultsString[0] === '0') {
         resultsString = resultsString.slice(1);
     }
     resultsStraight = resultsString;
 }
 const adulation = document.querySelector('.adulation');
+//uses RNG to dole out a random adulation based off the results
 let rng = 0;
 if (resultsStraight === '100') {
     adulation.classList.add('excellent');
@@ -78,7 +81,7 @@ if (resultsStraight === '100') {
     if (rng === 0) {
         adulation.textContent = 'Good job!';
     } else if (rng === 1) {
-        adulation.textContent = 'Good!'
+        adulation.textContent = 'Not bad!'
     } else {
         adulation.textContent = 'Alright!'
     }
@@ -108,6 +111,7 @@ if (resultsStraight === '100') {
 const evaluation = document.querySelector('.evaluation');
 evaluation.textContent = `You scored: ${correctAnswers} out of ${questions.length} - ${resultsStraight}% correct`;
 const img = document.querySelector('img');
+//displays random gif based off the adulation given
 const displayGif = async () => {
     try {
         const response = await fetch(`https://api.giphy.com/v1/gifs/translate?api_key=h2c3vzphvIByUtBEb1rnOHMANHfHBmnj&s=${adulation.textContent}`, {mode: 'cors'});
@@ -123,6 +127,7 @@ newQuiz.addEventListener('mousedown', () => {
     settingsBack([],'');
 });
 const review = document.querySelector('.review');
+//the DOM of the results screen is totally different than one from a question so this is needed when reviewing the questions
 review.addEventListener('mousedown', () => {
     container.replaceChildren();
     container.innerHTML = 
@@ -155,6 +160,7 @@ review.addEventListener('mousedown', () => {
         </div>
     </div>
     </div>`;
+    //And currentQuestion needs to be incremented by one to display the last question
     currentQuestion++;
     reviewQuestion(questions, currentQuestion, correctAnswers);
 });

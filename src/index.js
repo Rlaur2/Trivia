@@ -1,14 +1,17 @@
 import { settingsPage } from "./settings";
-
+//default values when mainPage is ran initially instead of later on with passed parameters
 let categorySelectionCheck = 0;
 let lastCategorySelected = '';
+//The passed parameters should've had the same name as before they were passed. I don't make the same mistake in the upcoming modules
 const mainPage = (number, categorySelected) => {
 const categories = document.querySelectorAll('.category');
 //this variable is to keep a count of how many categories were selected, we want a max of 4
+//If a number gets passed as a parameter(including zero), categorySelectionCheck becomes that number
 if (number != undefined) {
    categorySelectionCheck = number;
 };
 //variable used to "undo" and unselect the last category chosen when 4 have already been chosen
+//If a category selected gets passed, a loop is done to match the dataset.id and that becomes the lastCategorySelected
 if (categorySelected) {
     for (let category of categories) {
         if (category.dataset.id === categorySelected.dataset.id) {
@@ -16,10 +19,11 @@ if (categorySelected) {
         };
     };
 };
-//array that will contain the dataset.id of the chosen categories. The id is needed for the API call
+//array that will contain the dataset.id of the clicked categories. The id is needed for the API call
 let categoriesChosen = [];
 for (let category of categories) {
     category.addEventListener('mousedown', e => {
+        //if 4 categories have already been clicked, the last category selected will lose it's class
         if (categorySelectionCheck === 4 && !e.target.classList.contains('selected')) {
             lastCategorySelected.classList.remove('selected');
             e.target.classList.toggle('selected');
@@ -44,6 +48,7 @@ categoryNextButton.addEventListener('mousedown', e => {
    };
    const container = document.querySelector('.container');
    container.replaceChildren();
+   //sets up the DOM for the next module
    container.innerHTML = `<div class="row">
    <div class="col opening my-5">
        <div class="row welcome">

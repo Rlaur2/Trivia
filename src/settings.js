@@ -2,20 +2,24 @@ import { settingsBack } from "./settingsBack";
 import { quizStart } from "./quizStart";
 
 const settingsPage = (categoriesChosen, lastCategorySelected) => {
+    //questionAmount is the "input" element
     const questionAmount = document.querySelector('#question-amount');
     const difficultyRow = document.querySelector('.difficulty');
     let difficultySelected = '';
     difficultyRow.addEventListener('mousedown', e => {
+        //returns if you don't click on one of the actual options
         if (e.target.classList.contains('col-4') || e.target.classList.contains('selected')) {
             return;
-        }  
+        }
+        //removes the selected class from all then applies it to the target of the event listener  
         const difficulties = document.querySelectorAll('.difficulty>.col-2');
         for (let difficulty of difficulties) {
-            difficulty.classList.remove('selected');
+            difficulty.classList.remove('selected');0
         } 
         e.target.classList.toggle('selected');
         difficultySelected = e.target.dataset.difficulty;
     });
+    //the code to select the type of questions is nearly identical to choosing the difficulty
     let typeSelected = '';
     const typeRow = document.querySelector('.type');
     typeRow.addEventListener('mousedown', e => {
